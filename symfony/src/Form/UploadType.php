@@ -3,11 +3,12 @@
 namespace App\Form;
 
 use App\Entity\Cour;
+use App\Entity\Section;
 use App\Entity\Upload;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -26,6 +27,7 @@ class UploadType extends AbstractType
             ])
             ->add('file_vedio', TextType::class,[
                 'label' => 'Vedio Url',
+                'required'=> false,
                 'attr' => ['class' => 'form-control',
                             'placeholder' => 'https://www.youtube.com/'
                 ]
@@ -34,6 +36,12 @@ class UploadType extends AbstractType
                 'label' => 'PDF File',
                 'required'=> false,
                 'attr' => ['class' => 'form-control-file']
+            ])
+            ->add('section', EntityType::class,[
+                'class' => Section::class,
+                'choice_label' => 'title',
+                'label' => 'Section',
+                'attr' => ['class' => 'form-control']
             ])
             
         ;

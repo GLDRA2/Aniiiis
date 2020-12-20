@@ -49,6 +49,12 @@ class Upload
      */
     private $file_vedio;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Section::class, inversedBy="uploads")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $section;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -122,6 +128,18 @@ class Upload
     public function setFileVedio(?string $file_vedio): self
     {
         $this->file_vedio = $file_vedio;
+
+        return $this;
+    }
+
+    public function getSection(): ?Section
+    {
+        return $this->section;
+    }
+
+    public function setSection(?Section $section): self
+    {
+        $this->section = $section;
 
         return $this;
     }

@@ -66,10 +66,16 @@ class Cour
      */
     private $image;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Section::class, mappedBy="cour", orphanRemoval=true)
+     */
+    private $sections;
+
     public function __construct()
     {
         $this->upload = new ArrayCollection();
         $this->activity = new ArrayCollection();
+        $this->sections = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -222,6 +228,36 @@ class Cour
     public function setImage($image)
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Section[]
+     */
+    public function getSections(): Collection
+    {
+        return $this->sections;
+    }
+
+    public function addSection(Section $section): self
+    {
+        if (!$this->sections->contains($section)) {
+            $this->sections[] = $section;
+            $section->setCour($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSection(Section $section): self
+    {
+        if ($this->sections->removeElement($section)) {
+            // set the owning side to null (unless already changed)
+            if ($section->getCour() === $this) {
+                $section->setCour(null);
+            }
+        }
 
         return $this;
     }
