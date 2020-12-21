@@ -10,7 +10,7 @@
         <div class="row justify-content-center">
           <div class="col-lg-6">
             <div class="banner_content text-center">
-              <h2 class="text-warning">COURS PROFIL</h2>
+              <h2 class="text-warning" style=" text-transform: uppercase;"><strong>{{ groupe.cours.name }}</strong></h2>
               <div class="page_link">
                 <a href="index.html" class="text-warning">COURS</a>
                 <a href="courses.html" class="text-warning">COURS PROFIL</a>
@@ -32,6 +32,14 @@
         <div class="left-navigation">
           <ul class="list">
             <h5><i class="fas fa-tasks fa-x"></i> <strong>TASKS</strong></h5>
+               <li>
+              <a
+                href="{{ path('section_new', { id: groupe.cours.id }) }}"
+                style="color: white"
+                >ADD Section
+              </a>
+            </li>
+          
             <li>
               <a
                 href="{{ path('upload_new', { id: groupe.cours.id }) }}"
@@ -84,9 +92,7 @@
         <!--Main content code to be written here -->
       
           <div class="container">
-            <h1>
-              <strong>{{ groupe.cours.name }}</strong>
-            </h1>
+           
             <ul class="nav nav-tabs">
               <li class="nav-item">
                 <a class="nav-link active" data-toggle="tab" href="#Vedio"
@@ -178,7 +184,8 @@
 {###########################################################################}
 
               <div class="tab-pane fade" id="Document">
-                {% for section in groupe.cours.sections %}
+              <br>
+                {% for section in groupe.cours.sections %}     
               <!-- single course -->
               <h4 style="background-color: #002347;color: rgb(255, 255, 255);">
                 <strong>{{ section.title }}</strong>
@@ -211,9 +218,15 @@
 {###################################################}
               <div class="tab-pane fade" id="Activity">
                 <!-- activity work -->
+       <br>
+                  {% for section in groupe.cours.sections %}
+              <!-- single course -->
+              <h4 style="background-color: #002347;color: rgb(255, 255, 255);">
+                <strong>{{ section.title }}</strong>
+               </h4>
                 <br />
-                <br />
-                {% for activity in groupe.cours.activity %} {% if activity.file is
+            
+                {% for activity in section.activities %} {% if activity.file is
                 not null and activity.file|trim is not empty %}
   
                 <div class="card border-warning mb-5">
@@ -233,9 +246,9 @@
                     </p>
                   </div>
                 </div>
-                {% endif %} {% endfor %}
+                {% endif %} {% endfor %} {% endfor %}
               </div>
-
+ 
 
 
               {###########################################}

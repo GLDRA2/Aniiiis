@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\ActivityRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Section;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ActivityRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass=ActivityRepository::class)
@@ -50,6 +51,12 @@ class Activity
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Section::class, inversedBy="activities")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $sections;
 
 
     public function __construct()
@@ -148,6 +155,18 @@ class Activity
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getSections(): ?Section
+    {
+        return $this->sections;
+    }
+
+    public function setSections(?Section $sections): self
+    {
+        $this->sections = $sections;
 
         return $this;
     }

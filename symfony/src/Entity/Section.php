@@ -35,9 +35,15 @@ class Section
      */
     private $uploads;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Activity::class, mappedBy="sections", orphanRemoval=true)
+     */
+    private $activities;
+
     public function __construct()
     {
         $this->uploads = new ArrayCollection();
+        $this->activities = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -93,6 +99,36 @@ class Section
             // set the owning side to null (unless already changed)
             if ($upload->getSection() === $this) {
                 $upload->setSection(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Activity[]
+     */
+    public function getActivities(): Collection
+    {
+        return $this->activities;
+    }
+
+    public function addActivity(Activity $activity): self
+    {
+        if (!$this->activities->contains($activity)) {
+            $this->activities[] = $activity;
+            $activity->setSections($this);
+        }
+
+        return $this;
+    }
+
+    public function removeActivity(Activity $activity): self
+    {
+        if ($this->activities->removeElement($activity)) {
+            // set the owning side to null (unless already changed)
+            if ($activity->getSections() === $this) {
+                $activity->setSections(null);
             }
         }
 
