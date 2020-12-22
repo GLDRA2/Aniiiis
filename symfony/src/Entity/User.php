@@ -74,6 +74,16 @@ class User implements UserInterface
      */
     private $username;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Question::class, mappedBy="users")
+     */
+    private $questions;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Archive::class, mappedBy="user", orphanRemoval=true)
+     */
+    private $archives;
+
     public function __construct()
     {
         $this->activity = new ArrayCollection();
@@ -81,6 +91,8 @@ class User implements UserInterface
         $this->upload = new ArrayCollection();
         $this->depot = new ArrayCollection();
         $this->groupe = new ArrayCollection();
+        $this->questions = new ArrayCollection();
+        $this->archives = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -308,6 +320,63 @@ class User implements UserInterface
     public function setUsername(string $username): self
     {
         $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Question[]
+     */
+    public function getQuestions(): Collection
+    {
+        return $this->questions;
+    }
+
+    public function addQuestion(Question $question): self
+    {
+        if (!$this->questions->contains($question)) {
+            $this->questions[] = $question;
+            $question->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQuestion(Question $question): self
+    {
+        if ($this->questions->removeElement($question)) {
+            $question->removeUser($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Archive[]
+     */
+    public function getArchives(): Collection
+    {
+        return $this->archives;
+    }
+
+    public function addArchive(Archive $archive): self
+    {
+        if (!$this->archives->contains($archive)) {
+            $this->archives[] = $archive;
+            $archive->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArchive(Archive $archive): self
+    {
+        if ($this->archives->removeElement($archive)) {
+            // set the owning side to null (unless already changed)
+            if ($archive->getUser() === $this) {
+                $archive->setUser(null);
+            }
+        }
 
         return $this;
     }

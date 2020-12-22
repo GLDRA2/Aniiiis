@@ -1,0 +1,67 @@
+<div class="col-md-2 col-sm-4 sidebar1">
+  <br />
+  <br />
+  <div class="left-navigation">
+    <ul class="list">
+      <h5><i class="fas fa-tasks fa-x"></i> <strong>TASKS</strong></h5>
+      <li>
+        <a
+          href="{{ path('section_new', { id: groupe.cours.id }) }}"
+          style="color: white"
+          >ADD Section
+        </a>
+      </li>
+
+      <li>
+        <a
+          href="{{ path('upload_new', { id: groupe.cours.id }) }}"
+          style="color: white"
+          >ADD Article</a
+        >
+      </li>
+      <li>
+        <a
+          href="{{ path('activity_new', { id: groupe.cours.id }) }}"
+          style="color: white"
+          >ADD Activity
+        </a>
+      </li>
+      <li>
+        <a href="{{ path('cour_new') }}" style="color: white">ADD Depot </a>
+      </li>
+      <li>
+        <a href="{{ path('cour_new') }}" style="color: white">ADD Task </a>
+      </li>
+      <li>
+        <a href="{{ path('cour_new') }}" style="color: white"
+          >ADD Question for Task
+        </a>
+      </li>
+      <li>
+        <a
+          href="{{ path('cour_edit', { id: groupe.cours.id }) }}"
+          style="color: white"
+          >Update Cour</a
+        >
+      </li>
+      <li>
+        <a
+          href="{{ path('groupe_update', { id: groupe.id }) }}"
+          style="color: white"
+          >Update Groupe</a
+        >
+      </li>
+    </ul>
+    <br />
+    <ul class="list">
+      <h5><i class="fas fa-users fa-x"></i> <strong>Groupe</strong></h5>
+      <div class="container">
+        {% for user in groupe.users %}
+        <span class="badge badge-pill badge-info">{{ user.username }}</span>
+        {% endfor %}
+      </div>
+    </ul>
+    <br />
+    <br />
+  </div>
+</div>

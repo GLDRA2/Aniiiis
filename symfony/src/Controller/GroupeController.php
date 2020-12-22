@@ -6,6 +6,8 @@ use App\Entity\Cour;
 use App\Entity\User;
 use App\Entity\Groupe;
 use App\Form\JoinType;
+use App\Entity\Question;
+use App\Form\AnswerType;
 use App\Form\GroupeType;
 use App\Repository\GroupeRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -117,8 +119,6 @@ class GroupeController extends AbstractController
         ]);
     }
     
-
-
     /**
      * @Route("/{id}", name="groupe_delete", methods={"DELETE"})
      */

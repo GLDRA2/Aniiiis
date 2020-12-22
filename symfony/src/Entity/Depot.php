@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\DepotRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -38,6 +40,16 @@ class Depot
      * @ORM\JoinColumn(nullable=false)
      */
     private $activity;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Archive::class, mappedBy="depot", orphanRemoval=true)
+     */
+    private $archives;
+
+    public function __construct()
+    {
+        $this->archives = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -88,6 +100,36 @@ class Depot
     public function setActivity(?Activity $activity): self
     {
         $this->activity = $activity;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Archive[]
+     */
+    public function getArchives(): Collection
+    {
+        return $this->archives;
+    }
+
+    public function addArchive(Archive $archive): self
+    {
+        if (!$this->archives->contains($archive)) {
+            $this->archives[] = $archive;
+            $archive->setDepot($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArchive(Archive $archive): self
+    {
+        if ($this->archives->removeElement($archive)) {
+            // set the owning side to null (unless already changed)
+            if ($archive->getDepot() === $this) {
+                $archive->setDepot(null);
+            }
+        }
 
         return $this;
     }
