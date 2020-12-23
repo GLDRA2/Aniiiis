@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %} {% block title %}Groupe{% endblock %} {% block
 body %} {% block stylesheets %}
 <link rel="stylesheet" href="{{ asset('css/cour_profil.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/groupe1.css') }}" />
+
 {% endblock %}
 
 <!--================Home Banner Area =================-->
@@ -114,5 +116,7 @@ body %} {% block stylesheets %}
 
 <a href="{{ path('groupe_edit', { id: groupe.id }) }}">edit</a>
 
-{{ include("groupe/_delete_form.html.twig") }} #} {% endblock %} {% block
-JavaScript %} {% endblock %}
+{{ include("groupe/_delete_form.html.twig") }} #} {% endblock %} 
+{% block JavaScript %} 
+<script src="{{ asset('js/groupe1.js') }}"></script>
+{% endblock %}

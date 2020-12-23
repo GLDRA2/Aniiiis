@@ -1,3 +1,4 @@
+
 <div class="col-md-2 col-sm-4 sidebar1">
   <br />
   <br />
@@ -54,16 +55,32 @@
       </li>
     </ul>
     {% endif %}
-    <br />
-    <ul class="list">
-      <h5><i class="fas fa-users fa-x"></i> <strong>Groupe</strong></h5>
-      <div class="container">
-        {% for user in groupe.users %}
-        <span class="badge badge-pill badge-info">{{ user.username }}</span>
-        {% endfor %}
-      </div>
-    </ul>
-    <br />
-    <br />
+      
+    <!--==========================================-======================================-->
+    <div id="left" >
+      <ul class="nav menu">
+          <li class="item-8 "> 
+           <a><h5 class="lbl" style="font-size:20px; ">
+              <span data-toggle="collapse" href="#sub-item-8" class="sign fas fa-users " >&nbspGroup</h5>
+            </a>
+            {% for user in groupe.users %}
+            <ul class="children nav-child unstyled small " id="sub-item-8">
+              <li>
+                <a href="#">
+                  <span class="lbl" style="font-weight:bold; font-size:18px; color: white">{{ user.username }}</span>
+                </a>
+              </li>
+            </ul>
+            {% endfor %}
+          </li>
+          </ul>
+          </div>
+       
+    
+<!--==========================================-======================================-->
+
   </div>
 </div>
+
+
+
