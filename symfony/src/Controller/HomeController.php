@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -31,11 +32,13 @@ class HomeController extends AbstractController
     
     /**
      * @Route("/user/profile", name="user_profile")
+     * 
      */
-    public function profile(): Response
+    public function profile(UserRepository $userRep): Response
     {
+        $user = $userRep->findAll();
         return $this->render('user_profile/index.html.twig', [
-            'controller_name' => 'UserProfileController',
+            'user' => $user,
         ]);
     }
   

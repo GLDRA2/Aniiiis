@@ -1,0 +1,24 @@
+<table class="table table-striped">
+  {% for user in user %}
+  <tr class="table-row">
+    <th scope="col">
+      <img
+        class="rounded-circle"
+        width="30"
+        height="30"
+        src="../img/book.png"
+        data-holder-rendered="true"
+      />
+      {{ user.username }}
+    </th>
+    <td>{{ user.email }}</td>
+    <td>
+      {% for role in user.roles %}
+      {{ role }}
+      {% endfor %}
+    </td>
+    <td><a class="btn btn-success">edit</a></td>
+    <td><a class="btn btn-primary">delete</a></td>
+  </tr>
+  {% endfor %}
+</table>

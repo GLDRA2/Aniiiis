@@ -67,7 +67,7 @@ class CourController extends AbstractController
         ]);
     }
 
-      /**
+    /**
      * @Route("/{id}", name="cour_show", methods={"GET"})
      */
     public function show(Cour $cour): Response
