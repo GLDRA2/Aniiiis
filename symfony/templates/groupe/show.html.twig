@@ -26,16 +26,19 @@ body %} {% block stylesheets %}
 
 <!--================End Home Banner Area =================-->
 
-<div class="container-fluid">
+<div class="container-fluid" >
+  
   <div class="row">
     <!--================Side Nav =================-->
+   
     {% include "groupe/_side_nav.html.twig" %}
+  
     <!--==========================================-->
 
-    <div class="col-md-10 col-sm-8 main-content">
+    <div class="col-md-10 col-sm-8 main-content" >
       <br />
       <!--================Main Menu =================-->
-      <div class="container">
+      <div class="container" >
         <ul class="nav nav-tabs">
           <li class="nav-item">
             <a class="nav-link active" data-toggle="tab" href="#Vedio">Vedio</a>
@@ -54,9 +57,11 @@ body %} {% block stylesheets %}
           <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#TASK">Task</a>
           </li>
+          {% if is_granted('ROLE_TEACHER') %}
           <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#Archive">Archive</a>
           </li>
+          {% endif %}
         </ul>
 
         <div id="myTabContent" class="tab-content">
@@ -91,10 +96,12 @@ body %} {% block stylesheets %}
           </div>
           <!--==========================================-->
             <!--================Show Archive=================-->
+            {% if is_granted('Role_TEACHER') %}
             <div class="tab-pane fade" id="Archive">
               <br />
               {% include "groupe/_archive.html.twig" %}
             </div>
+            {% endif %}
             <!--==========================================-->
         </div>
       </div>

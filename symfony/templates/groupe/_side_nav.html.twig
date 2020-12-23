@@ -2,6 +2,7 @@
   <br />
   <br />
   <div class="left-navigation">
+    {% if is_granted('ROLE_TEACHER') %}
     <ul class="list">
       <h5><i class="fas fa-tasks fa-x"></i> <strong>TASKS</strong></h5>
       <li>
@@ -52,6 +53,7 @@
         >
       </li>
     </ul>
+    {% endif %}
     <br />
     <ul class="list">
       <h5><i class="fas fa-users fa-x"></i> <strong>Groupe</strong></h5>

@@ -119,10 +119,12 @@
                   
                     <li class="nav-item">
                       <a class="nav-link" href="{{ path('staff') }}">Teacher</a>
+                      {% if is_granted('ROLE_TEACHER') %}
                     </li>
                        <li class="nav-item">
                       <a class="nav-link" href="{{ path('cour_new') }}">Create Cours</a>
                     </li>
+                    {% endif %}
                   </ul>
                 </li>
                 <li class="nav-item submenu dropdown">
