@@ -54,6 +54,9 @@ body %} {% block stylesheets %}
           <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#TASK">Task</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#Archive">Archive</a>
+          </li>
         </ul>
 
         <div id="myTabContent" class="tab-content">
@@ -87,6 +90,12 @@ body %} {% block stylesheets %}
             {% include "groupe/_task.html.twig" %}
           </div>
           <!--==========================================-->
+            <!--================Show Archive=================-->
+            <div class="tab-pane fade" id="Archive">
+              <br />
+              {% include "groupe/_archive.html.twig" %}
+            </div>
+            <!--==========================================-->
         </div>
       </div>
       <!--==========================================-->

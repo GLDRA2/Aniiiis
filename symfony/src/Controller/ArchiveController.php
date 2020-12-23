@@ -32,6 +32,7 @@ class ArchiveController extends AbstractController
     public function new(Request $request): Response
     {
         $archive = new Archive();
+       
         $form = $this->createForm(ArchiveType::class, $archive);
         $form->handleRequest($request);
 
@@ -60,8 +61,13 @@ class ArchiveController extends AbstractController
         $form->handleRequest($request);
         $exist = $this->getDoctrine()->getRepository(Archive::class)->findBy(['user'=>$user]);
 
-        if ($form->isSubmitted() && $form->isValid() && $exist == null) {
+        if ($form->isSubmitted() && $form->isValid() ) {
             $entityManager = $this->getDoctrine()->getManager();
+            $filepdf = $archive->getFile();
+            $fileName = md5(uniqid()) . "." . $filepdf->guessExtension();
+            $filepdf->move($this->getParameter('upload_directory'), $fileName);
+            $archive->setFile($fileName);
+            
             $archive->setUser($user);
             $archive->setDepot($depot);
             $entityManager->persist($archive);
