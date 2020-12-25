@@ -29,6 +29,7 @@ vedio.filevedio|trim is not empty %}
             <!-- upload Description -->
             {{ vedio.description }}
           </p>
+          {% if is_granted('ROLE_TEACHER') %}
           <div
             class="course_meta d-flex justify-content-lg-between align-items-lg-center flex-lg-row flex-column mt-4"
           >
@@ -36,14 +37,20 @@ vedio.filevedio|trim is not empty %}
               <span class="d-inline-block ml-2"></span>
             </div>
             <div class="mt-lg-0 mt-3">
-              <span class="meta_info mr-4">
-                <a href="#"> <i class="ti-user mr-2"></i>25 </a>
+              <span class="meta_info">
+                <a
+                  href="{{ path('upload_edit', { id: vedio.id }) }}"
+                  class="btn btn-primary"
+                  style="color: white"
+                  >edit</a
+                >
               </span>
-              <span class="meta_info"
-                ><a href="#"> <i class="ti-heart mr-2"></i>35 </a></span
+              <span class="meta_info">
+                {% include "groupe/_delete_upload.html.twig" %}</span
               >
             </div>
           </div>
+          {% endif %}
         </div>
       </div>
     </div>
