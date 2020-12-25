@@ -113,12 +113,13 @@
                     >Pages</a
                   >
                   <ul class="dropdown-menu">
+                     {% if is_granted('ROLE_STUDENT') %}
                     <li class="nav-item">
                       <a class="nav-link" href="{{ path('cour_index') }}"
                         >Cours</a
                       >
                     </li>
-                  
+                  {% endif %}
                     <li class="nav-item">
                       <a class="nav-link" href="{{ path('staff') }}">Teacher</a>
                       {% if is_granted('ROLE_TEACHER') %}

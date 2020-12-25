@@ -77,12 +77,22 @@
                 <li class="nav-item">
                   <a
                     class="nav-link"
-                    href="#favorite"
+                    href="#teacherList"
                     role="tab"
                     data-toggle="tab"
                   >
-                    <i class="material-icons">Change</i>
-                    ROLE
+                    <i class="material-icons">TEACHER LIST</i>
+                    <a>
+                    </li>
+                    <li class="nav-item">
+                    <a
+                    class="nav-link"
+                    href="#studentList"
+                    role="tab"
+                    data-toggle="tab"
+                  >
+                    <i class="material-icons">STUDENT LIST</i>
+                    
                   </a>
                 </li>
                 {% endif %}
@@ -113,9 +123,14 @@
 
           <!--================ chnage role for admin only  =================-->
           {% if is_granted('ROLE_ADMIN') %}
-          <div class="tab-pane text-center gallery" id="favorite">
+          <div class="tab-pane text-center gallery" id="teacherList">
             <div class="row">
               {% include "user_profile/_change_role.html.twig" %}
+            </div>
+          </div>
+          <div class="tab-pane text-center gallery" id="studentList">
+            <div class="row">
+              {% include "user_profile/student_list.html.twig" %}
             </div>
           </div>
           {% endif %}

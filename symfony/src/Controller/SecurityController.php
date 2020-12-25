@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 class SecurityController extends AbstractController
 {
 
@@ -64,4 +64,24 @@ class SecurityController extends AbstractController
     {
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
+
+
+    /**
+     * @Route("/{id}/updaterole", name="update_role")
+     * @ÎsGranted('ROLE_ADMIN')
+     * 
+     */
+    public function role(User $user, $id)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository(User::class)->find($id);
+        $user->setRoles(['ROLE_TEACHER']);
+        $em->persist($user);
+        $em->flush();
+
+        return $this->redirectToRoute('app_login');
+    }
+
+
 }

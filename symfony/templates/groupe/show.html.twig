@@ -98,7 +98,7 @@ body %} {% block stylesheets %}
           </div>
           <!--==========================================-->
             <!--================Show Archive=================-->
-            {% if is_granted('Role_TEACHER') %}
+            {% if is_granted('ROLE_TEACHER') %}
             <div class="tab-pane fade" id="Archive">
               <br />
               {% include "groupe/_archive.html.twig" %}
