@@ -83,7 +83,11 @@ class UploadController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('upload_index');
+            $groupe = $upload->getCour()->getGroupe();
+
+            return $this->redirectToRoute('groupe_show', [
+                'id' => $groupe->getId(),
+            ]);
         }
 
         return $this->render('upload/edit.html.twig', [
@@ -102,8 +106,11 @@ class UploadController extends AbstractController
             $entityManager->remove($upload);
             $entityManager->flush();
         }
+        $groupe = $upload->getCour()->getGroupe();
 
-        return $this->redirectToRoute('upload_index');
+        return $this->redirectToRoute('groupe_show', [
+            'id' => $groupe->getId(),
+        ]);
     }
 
 }
